@@ -37,6 +37,45 @@ public class Board {
 
     }
 
+    private ArrayList<Coordinates> p2Pieces(int player){
+
+        int player2;
+        if (player == Black){
+            player2 == White;
+        } else{
+            player2 == Black;
+        }
+
+        ArrayList<Coordinates> p2pieces = new ArrayList<Coordinates>;
+
+        for(i=0; i< Board.lenght;i++){
+            for(j=0; Board.lenght;i++) {
+                if(Board[i][j] == p2pieces){
+                    p2pieces.add(new Coordinates(i,j));
+            }
+
+        }
+
+    }
+
+
+    public ArrayList<Coordinates> possibleMoves(int player){
+
+        int player2;
+        if (player == Black){
+            player2 == White;
+        } else{
+            player2 == Black;
+        }
+
+
+
+
+
+    }
+
+
+
     public void initBoard() {
 
         int i = 0;
