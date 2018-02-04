@@ -29,7 +29,7 @@ public class AIPlayer {
     	if(depth == this.maxdepth) {
     		for(Board.Coordinates nextMove : moves) {
         		Board localBoard = new Board(board);
-    			localBoard.Move(nextMove);
+    			localBoard.move(nextMove,color);
     			values.add(euristic(localBoard));
     		}
     		return Collections.min(values);
@@ -38,7 +38,7 @@ public class AIPlayer {
     	//If we are not in a maximum depth, do every move and call corresponding function. Then check all the values and decide
     	for(Board.Coordinates nextMove : moves){
     		Board localBoard = new Board(board);
-    		localBoard.Move(nextMove);
+    		localBoard.move(nextMove,color);
     		values.add(minMax(localBoard,depth + 1));
     	}
 
@@ -78,7 +78,7 @@ public class AIPlayer {
 
     	for(Board.Coordinates nextMove : moves){
     		Board localBoard = new Board(board);
-    		localBoard.Move(nextMove);
+    		localBoard.move(nextMove,color);
     		values.add(minMax(localBoard,depth + 1));
     	}
     	
