@@ -1,5 +1,7 @@
 package Utilities;
 
+import java.util.ArrayList;
+
 public class Board {
 
     //Board Pieces
@@ -16,9 +18,17 @@ public class Board {
         Board = new int[8][8];
 
     }
+    
+    //Copy constructor
+    public Board(Board copyBoard){
+    	for(int i = 0; i < Board.length; i++){
+    		for(int j = 0; j < Board.length; i++){
+    	    	this.Board[i][j] = copyBoard.Board[i][j];
+    		}
+    	}
+    }
 
-
-    public class Coordinates{
+    public class Coordinates {
 
         //Coordinates
         char x = 'a';
@@ -46,10 +56,10 @@ public class Board {
             player2 == Black;
         }
 
-        ArrayList<Coordinates> p2pieces = new ArrayList<Coordinates>;
+        ArrayList<Coordinates> p2pieces = new ArrayList<Coordinates>();
 
-        for(i=0; i< Board.lenght;i++){
-            for(j=0; Board.lenght;i++) {
+        for(int i=0; i< Board.length;i++){
+            for(int j=0; j < Board.length;i++) {
                 if(Board[i][j] == p2pieces){
                     p2pieces.add(new Coordinates(i,j));
             }
