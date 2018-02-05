@@ -13,6 +13,10 @@ public class AIPlayer {
     public AIPlayer(int color) {
     	this.color = color;
     }
+    
+    public int getColor() {
+    	return this.color;
+    }
     /*private int moveMax(){
 
     }
@@ -71,7 +75,7 @@ public class AIPlayer {
     		return blacks - whites;
     }
     
-    public Board chosenMove(Board board) {
+    public Board.Coordinates chosenMove(Board board) {
     	int depth = 0;
     	ArrayList<Board.Coordinates> moves = board.possibleMoves(this.color);
     	ArrayList<Integer> values = new ArrayList<Integer>();
@@ -83,6 +87,8 @@ public class AIPlayer {
     	}
     	
     	Board.Coordinates bestMove = moves.get(values.indexOf(Collections.max(values)));
+    	
+    	return bestMove;
     	
     	//Still have to decide what this returns, if the move or the board with the move done.
     	
