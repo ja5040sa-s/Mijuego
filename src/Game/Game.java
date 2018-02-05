@@ -37,8 +37,10 @@ public class Game {
 			    System.out.println();
 			}
 			
-			if(player1 == Board.Black) {
-				
+			if(human.getColor() == Board.Black) {
+				human.move(reversi);
+			} else {
+				machine.chosenMove(reversi);
 			}
 			
 			
