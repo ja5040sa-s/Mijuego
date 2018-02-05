@@ -58,7 +58,7 @@ public class Board {
             this.y = y;
         }
 
-        public Coordinates(char x, int y) {
+        public Coordinates(int x, int y) {
             this.x = x;
             this.y = y;
         }
@@ -270,6 +270,7 @@ public class Board {
             }
 
         }
+        return p1Pieces();
 
     }
 
@@ -286,10 +287,11 @@ public class Board {
             }
 
         }
+        return p2Pieces();
 
     }
 
-    public ArrayList<Coordinates> possibleMoves(int player){
+    public boolean ArrayList<Coordinates> possibleMoves(int player){
 
         int player2;
         if (player == Black){
@@ -303,34 +305,34 @@ public class Board {
         ArrayList<Coordinates> p1Available = new ArrayList<Coordinates>();
         Coordinates check = new Coordinates();
         Iterator<Coordinates> it = p1Pieces.iterator();
-        it = p1Pieces;
+
     //It checks every one of its pieces and the blank spaces surrounding them, if it is Blank it adds it to
     //the array with all the possible moves
-       for(it.hasNext){
+       for(it.hasNext()){
             check = it.next();
-               if((Board[check.x][check.y-1] == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x][check.y-1] == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x-1][check.y]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x-1][check.y]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x][check.y+1]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x+1][check.y]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x+1][check.y]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x-1][check.y-1]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                            p1Available.add(new Coordinates(i,j));
+               if((Board[check.x-1][check.y-1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x+1][check.y-1] == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x+1][check.y-1] == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x-1][check.y+1]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)) {
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x-1][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)) {
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x+1][check.y+1]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x+1][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
 
 
