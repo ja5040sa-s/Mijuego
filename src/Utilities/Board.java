@@ -69,7 +69,7 @@ public class Board {
         }
         
         public char getX() {
-        	return ((char) ((int) 'a' + x));
+        	return (char) ((int) 'a' + x);
         }
         
         public int getY() {

@@ -43,6 +43,18 @@ public class Game {
 				machine.chosenMove(reversi);
 			}
 			
+			for (int i = 0; i < reversi.Board.length; i++) {
+			    for (int j = 0; j < reversi.Board.length; j++) {
+			        System.out.print(reversi.Board[i][j] + " ");
+			    }
+			    System.out.println();
+			}
+			
+			if(human.getColor() == Board.Black) {
+				human.move(reversi);
+			} else {
+				machine.chosenMove(reversi);
+			}
 			
 		}
 	}
