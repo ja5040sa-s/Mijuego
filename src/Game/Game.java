@@ -19,6 +19,7 @@ public class Game {
 			color = reader.next();
 		} while(!(color.equals("White") || color.equals("Black")));
 		
+		System.out.println("Colors have been chosen");
 		if(color.equals("White")) {
 			human = new Player(Board.White);
 			machine =  new AIPlayer(Board.Black);
@@ -50,11 +51,6 @@ public class Game {
 			    System.out.println();
 			}
 			
-			if(human.getColor() == Board.Black) {
-				human.move(reversi);
-			} else {
-				machine.chosenMove(reversi);
-			}
 			
 		}
 	}
