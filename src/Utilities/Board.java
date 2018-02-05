@@ -339,7 +339,7 @@ public class Board {
     public boolean isThereMoves(){
         for(int i = 0; i < Board.length; i++)
             for(int j = 0; j < Board[i].length; j++)
-                if (Board[i][j] == EMPTY) {
+                if (Board[i][j] == Blank) {
                     return true;
         }
         return false;
