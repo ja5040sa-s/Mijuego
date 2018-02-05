@@ -47,7 +47,7 @@ public class Board {
 
     }
     
-    private void checkRight(Coordinates coords, int color, int oppositeColor){
+    private void flipRight(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
 
 		if(Board[x_integer+1][coords.y] == oppositeColor){
@@ -64,11 +64,10 @@ public class Board {
 			}
 		}
     }
-    
-    private void checkLeft(Coordinates coords, int color, int oppositeColor){
+    private void flipLeft(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
 
-    	//Check to the lefr of the piece
+    	//Check to the left of the piece
 		if(Board[x_integer-1][coords.y] == oppositeColor){
 			//Iterate to find a piece of our color
 			for(int i = x_integer - 2; i >= 0; i--){
@@ -83,7 +82,7 @@ public class Board {
 			}
 		}
     }
-    private void checkUp(Coordinates coords, int color, int oppositeColor){
+    private void flipUp(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
 
     	//Check upper
@@ -101,7 +100,7 @@ public class Board {
 			}
 		}
     }
-    private void checkDown(Coordinates coords, int color, int oppositeColor){
+    private void flipDown(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
     	
 		if(Board[x_integer][coords.y-1] == oppositeColor){
@@ -118,7 +117,7 @@ public class Board {
 			}
 		}
     }
-    private void checkUpRight(Coordinates coords, int color, int oppositeColor){
+    private void flipUpRight(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
     	//Check upper right corner
 		if(Board[x_integer+1][coords.y+1] == oppositeColor){
@@ -135,7 +134,7 @@ public class Board {
 			}
 		}
     }
-    private void checkUpLeft(Coordinates coords, int color, int oppositeColor){
+    private void flipUpLeft(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
 
     	if(Board[x_integer-1][coords.y+1] == oppositeColor){
@@ -152,7 +151,7 @@ public class Board {
 			}
 		}
     }
-    private void checkDownRight(Coordinates coords, int color, int oppositeColor){
+    private void flipDownRight(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
     	
     	if(Board[x_integer+1][coords.y-1] == oppositeColor){
@@ -169,7 +168,7 @@ public class Board {
 			}
 		}
     }    
-    private void checkDownLeft(Coordinates coords, int color, int oppositeColor){
+    private void flipDownLeft(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
 
     	if(Board[x_integer-1][coords.y-1] == oppositeColor){
@@ -204,28 +203,28 @@ public class Board {
     	
     	
     	if(x_integer < (Board.length-2)){
-        	checkRight(coords, color, oppositeColor);
+        	flipRight(coords, color, oppositeColor);
     	}
     	if(x_integer > 1){
-    		checkLeft(coords, color, oppositeColor);
+    		flipLeft(coords, color, oppositeColor);
     	}
     	if(coords.y < (Board.length - 2)){
-    		checkUp(coords, color, oppositeColor);
+    		flipUp(coords, color, oppositeColor);
     	}
     	if(coords.y > 1){
-    		checkDown(coords, color, oppositeColor);
+    		flipDown(coords, color, oppositeColor);
     	}
     	if((coords.y > 1) && (x_integer > 1)){
-    		checkDownLeft(coords, color, oppositeColor);
+    		flipDownLeft(coords, color, oppositeColor);
     	}
     	if((coords.y > 1) && (x_integer < (Board.length - 2))){
-    		checkDownRight(coords, color, oppositeColor);
+    		flipDownRight(coords, color, oppositeColor);
     	}
     	if((coords.y < (Board.length - 2)) && (x_integer > 1)){
-    		checkUpLeft(coords, color, oppositeColor);
+    		flipUpLeft(coords, color, oppositeColor);
     	}
     	if((coords.y < (Board.length -2)) && (x_integer < (Board.length - 2))){
-    		checkUpRight(coords, color, oppositeColor);
+    		flipUpRight(coords, color, oppositeColor);
     	}
     }
 
