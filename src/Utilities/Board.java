@@ -1,6 +1,6 @@
 package Utilities;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Board {
 
@@ -55,10 +55,10 @@ public class Board {
         //Constructor
         public Coordinates(char x, int y) {
             this.x = ((int) 'a') - ((int) x);
-            this.y = y;
+            this.y = y - 1;
         }
 
-        public Coordinates(char x, int y) {
+        public Coordinates(int x, int y) {
             this.x = x;
             this.y = y;
         }
@@ -67,7 +67,14 @@ public class Board {
             x = 'a';
             y = 0;
         }
-
+        
+        public char getX() {
+        	return ((char) ((int) 'a' + x));
+        }
+        
+        public int getY() {
+        	return (y + 1);
+        }
     }
     
     private void flipRight(Coordinates coords, int color, int oppositeColor){
@@ -302,11 +309,10 @@ public class Board {
         p1 = p1Pieces(player);
         ArrayList<Coordinates> p1Available = new ArrayList<Coordinates>();
         Coordinates check = new Coordinates();
-        Iterator<Coordinates> it = p1Pieces.iterator();
-        it = p1Pieces;
+        Iterator<Coordinates> it = p1.iterator();
     //It checks every one of its pieces and the blank spaces surrounding them, if it is Blank it adds it to
     //the array with all the possible moves
-       for(it.hasNext){
+       for(it.hasNext();;){
             check = it.next();
                if((Board[check.x][check.y-1] == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
                    p1Available.add(new Coordinates(i,j));
@@ -337,7 +343,7 @@ public class Board {
 
         }
 
-    return p1Available();
+    return p1Available;
     }
 
 
