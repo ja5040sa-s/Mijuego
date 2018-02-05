@@ -16,7 +16,25 @@ public class Board {
 
     public Board(){
         Board = new int[8][8];
+        int i = 0;
+        int j = 0;
+        
+        while(i<8){
+            while(j<8){
+               if(i == 3 && j == 3) {
+                   Board[i][j] = White;
+               }else if(i == 4 && j == 4) {
+                   Board[i][j] = White;
+               }else if(i == 3 && j == 4) {
+                   Board[i][j] = Black;
+               }else if(i == 4 && j == 3) {
+                   Board[i][j] = Black;
+               }else  {
+                   Board[i][j] = Blank;
+               }
+            }
 
+        }
     }
     
     //Copy constructor
@@ -315,29 +333,4 @@ public class Board {
 
 
     }
-
-
-
-    public void initBoard() {
-
-        int i = 0;
-        int j = 0;
-        while(i<8){
-            while(j<8){
-               if(i == 3 && j == 3) {
-                   Board[i][j] = White;
-               }else if(i == 4 && j == 4) {
-                   Board[i][j] = White;
-               }else if(i == 3 && j == 4) {
-                   Board[i][j] = Black;
-               }else if(i == 4 && j == 3) {
-                   Board[i][j] = Black;
-               }else  {
-                   Board[i][j] = Blank;
-               }
-            }
-
-        }
-    }
-
 }
