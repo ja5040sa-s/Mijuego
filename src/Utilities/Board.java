@@ -18,7 +18,7 @@ public class Board {
         Board = new int[8][8];
         int i = 0;
         int j = 0;
-        
+
         while(i<8){
             while(j<8){
                if(i == 3 && j == 3) {
@@ -36,7 +36,7 @@ public class Board {
 
         }
     }
-    
+
     //Copy constructor
     public Board(Board copyBoard){
     	for(int i = 0; i < Board.length; i++){
@@ -49,13 +49,13 @@ public class Board {
     public class Coordinates {
 
         //Coordinates
-        int x = 0;
+        int x = '0';
         int y = 0;
 
         //Constructor
         public Coordinates(char x, int y) {
             this.x = ((int) 'a') - ((int) x);
-            this.y = y - 1;
+            this.y = y;
         }
 
         public Coordinates(int x, int y) {
@@ -76,7 +76,7 @@ public class Board {
         	return (y + 1);
         }
     }
-    
+
     private void flipRight(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
 
@@ -132,7 +132,7 @@ public class Board {
     }
     private void flipDown(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
-    	
+
 		if(Board[x_integer][coords.y-1] == oppositeColor){
 			//Iterate to find a piece of our color
 			for(int i = coords.y - 2; i >= 0; i--){
@@ -183,7 +183,7 @@ public class Board {
     }
     private void flipDownRight(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
-    	
+
     	if(Board[x_integer+1][coords.y-1] == oppositeColor){
 			//Iterate to find a piece of our color
 			for(int i = x_integer + 2,j = coords.y - 2; (i < Board.length) && (j >= 0) ; i++,j--){
@@ -197,7 +197,7 @@ public class Board {
 				}
 			}
 		}
-    }    
+    }
     private void flipDownLeft(Coordinates coords, int color, int oppositeColor){
     	int x_integer = ((int) 'a') - ((int) coords.x);
 
@@ -215,23 +215,23 @@ public class Board {
 			}
 		}
     }
-    
+
     public void move(Coordinates coords, int color){
     	//I won't check if the move is valid, I assume it is. For the algorithm it is right. We have to make sure that we also do this for the other player
-    	//Also assumed the coordenates are within a proper range. 
+    	//Also assumed the coordenates are within a proper range.
     	//We consider both coordinates to be in 0-7 range although y will be given in 1-8 range. Be careful!! Maybe modify constructor?
     	int x_integer = ((int) 'a') - ((int) coords.x);
     	Board[x_integer][coords.y] = color;
-    	
+
     	//I will try to do here the flipping algorithm. Maybe it has to be placed inside some other method/class? Coudl this also be simplified nesting functions?
     	int oppositeColor;
     	if(color == White){
     		oppositeColor = Black;
     	}
-    	else 
+    	else
     		oppositeColor = White;
-    	
-    	
+
+
     	if(x_integer < (Board.length-2)){
         	flipRight(coords, color, oppositeColor);
     	}
@@ -277,6 +277,7 @@ public class Board {
             }
 
         }
+        return p2pieces;
 
     }
 
@@ -293,7 +294,7 @@ public class Board {
             }
 
         }
-
+        return p1pieces;
     }
 
     public ArrayList<Coordinates> possibleMoves(int player){
@@ -310,40 +311,36 @@ public class Board {
         ArrayList<Coordinates> p1Available = new ArrayList<Coordinates>();
         Coordinates check = new Coordinates();
         Iterator<Coordinates> it = p1.iterator();
+
     //It checks every one of its pieces and the blank spaces surrounding them, if it is Blank it adds it to
     //the array with all the possible moves
-       for(it.hasNext();;){
+        for(it.hasNext();;){
             check = it.next();
-               if((Board[check.x][check.y-1] == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x][check.y-1] == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x-1][check.y]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x-1][check.y]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x][check.y+1]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x+1][check.y]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x+1][check.y]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x-1][check.y-1]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                            p1Available.add(new Coordinates(i,j));
+               if((Board[check.x-1][check.y-1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x+1][check.y-1] == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x+1][check.y-1] == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x-1][check.y+1]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)) {
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x-1][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)) {
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x+1][check.y+1]  == Blank) && (x>=0 && x<=7) && (y>=0 && y <= 7)){
-                   p1Available.add(new Coordinates(i,j));
+               if((Board[check.x+1][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
+                   p1Available.add(new Coordinates(check.x,check.y));
                }
-
-
-
         }
-
-    return p1Available;
     }
 
 
