@@ -49,12 +49,12 @@ public class Board {
     public class Coordinates {
 
         //Coordinates
-        char x = 'a';
+        int x = 0;
         int y = 0;
 
         //Constructor
         public Coordinates(char x, int y) {
-            this.x = ((int) 'a') - ((int) coords.x);
+            this.x = ((int) 'a') - ((int) x);
             this.y = y;
         }
 
