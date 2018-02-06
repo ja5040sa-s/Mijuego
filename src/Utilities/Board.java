@@ -19,8 +19,8 @@ public class Board {
         int i = 0;
         int j = 0;
 
-        while(i<8){
-            while(j<8){
+        for(i=0;i<8;i++){
+            for(j=0;j<8;j++){
                if(i == 3 && j == 3) {
                    Board[i][j] = White;
                }else if(i == 4 && j == 4) {
@@ -33,7 +33,6 @@ public class Board {
                    Board[i][j] = Blank;
                }
             }
-
         }
     }
 
@@ -49,7 +48,7 @@ public class Board {
     public class Coordinates {
 
         //Coordinates
-        int x = '0';
+        int x = 0;
         int y = 0;
 
         //Constructor
@@ -64,7 +63,7 @@ public class Board {
         }
 
         public Coordinates() {
-            x = 'a';
+            x = 0;
             y = 0;
         }
         
@@ -270,7 +269,7 @@ public class Board {
         ArrayList<Coordinates> p2pieces = new ArrayList<Coordinates>();
 
         for(int i=0; i< Board.length;i++){
-            for(int j=0; j < Board.length;i++) {
+            for(int j=0; j < Board.length;j++) {
                 if(Board[i][j] == player2){
                     p2pieces.add(new Coordinates(i,j));
                 }
@@ -282,17 +281,14 @@ public class Board {
     }
 
     private ArrayList<Coordinates> p1Pieces(int player){
-
-
         ArrayList<Coordinates> p1pieces = new ArrayList<Coordinates>();
 
         for(int i=0; i< Board.length;i++){
-            for(int j=0; j < Board.length;i++) {
+            for(int j=0; j < Board.length;j++) {
                 if(Board[i][j] == player){
                     p1pieces.add(new Coordinates(i,j));
                 }
             }
-
         }
         return p1pieces;
     }
@@ -312,8 +308,9 @@ public class Board {
         Coordinates check = new Coordinates();
         Iterator<Coordinates> it = p1.iterator();
 
-    //It checks every one of its pieces and the blank spaces surrounding them, if it is Blank it adds it to
-    //the array with all the possible moves
+        //It checks every one of its pieces and the blank spaces surrounding them, if it is Blank it adds it to
+        //the array with all the possible moves
+
         while(it.hasNext()){
             check = it.next();
                if((Board[check.x][check.y-1] == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
@@ -334,7 +331,7 @@ public class Board {
                if((Board[check.x+1][check.y-1] == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
                    p1Available.add(new Coordinates(check.x,check.y));
                }
-               if((Board[check.x-1][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)) {
+               if((Board[check.x-1][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
                    p1Available.add(new Coordinates(check.x,check.y));
                }
                if((Board[check.x+1][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
