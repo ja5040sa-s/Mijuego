@@ -304,42 +304,42 @@ public class Board {
 
         while(it.hasNext()){
             check = it.next();
-            if((Board[check.x][check.y-1] == player2)) {
+            if(inInside(check) && (Board[check.x][check.y-1] == player2)) {
                 if ((Board[check.x][check.y - 2] == Blank) && (check.x >= 0 && check.x <= 7) && (check.y >= 0 && check.y <= 7)) {
                     p1Available.add(new Coordinates(check.x, check.y - 2));
                 }
             }
-            if((Board[check.x-1][check.y] == player2)) {
+            if(inInside(check) &&(Board[check.x-1][check.y] == player2)) {
                 if ((Board[check.x-2][check.y] == Blank) && (check.x >= 0 && check.x <= 7) && (check.y >= 0 && check.y <= 7)) {
                     p1Available.add(new Coordinates(check.x-2, check.y));
                 }
             }
-            if((Board[check.x][check.y+1] == player2)) {
+            if(inInside(check) &&(Board[check.x][check.y+1] == player2)) {
                 if ((Board[check.x][check.y + 2] == Blank) && (check.x >= 0 && check.x <= 7) && (check.y >= 0 && check.y <= 7)) {
                     p1Available.add(new Coordinates(check.x, check.y + 2));
                 }
             }
-            if((Board[check.x+1][check.y] == player2)) {
+            if(inInside(check) &&(Board[check.x+1][check.y] == player2)) {
                 if ((Board[check.x+2][check.y] == Blank) && (check.x >= 0 && check.x <= 7) && (check.y >= 0 && check.y <= 7)) {
                     p1Available.add(new Coordinates(check.x+2, check.y));
                 }
             }
-            if((Board[check.x-1][check.y-1] == player2)) {
+            if(inInside(check) &&(Board[check.x-1][check.y-1] == player2)) {
                 if ((Board[check.x-2][check.y - 2] == Blank) && (check.x >= 0 && check.x <= 7) && (check.y >= 0 && check.y <= 7)) {
                     p1Available.add(new Coordinates(check.x, check.y - 2));
                 }
             }
-            if((Board[check.x+1][check.y-1] == player2)) {
+            if(inInside(check) &&(Board[check.x+1][check.y-1] == player2)) {
                 if ((Board[check.x+2][check.y - 2] == Blank) && (check.x >= 0 && check.x <= 7) && (check.y >= 0 && check.y <= 7)) {
                     p1Available.add(new Coordinates(check.x+2, check.y - 2));
                 }
             }
-            if((Board[check.x-1][check.y+1] == player2)) {
+            if(inInside(check) &&(Board[check.x-1][check.y+1] == player2)) {
                 if ((Board[check.x-2][check.y + 2] == Blank) && (check.x >= 0 && check.x <= 7) && (check.y >= 0 && check.y <= 7)) {
                     p1Available.add(new Coordinates(check.x-2, check.y + 2));
                 }
             }
-            if((Board[check.x+1][check.y+1] == player2)) {
+            if(inInside(check) &&(Board[check.x+1][check.y+1] == player2)) {
                 if ((Board[check.x+2][check.y + 2] == Blank) && (check.x >= 0 && check.x <= 7) && (check.y >= 0 && check.y <= 7)) {
                     p1Available.add(new Coordinates(check.x+2, check.y + 2));
                 }
@@ -347,6 +347,13 @@ public class Board {
 
         }
         return p1Available;
+    }
+    private boolean isInside(Coordinates coord) {
+
+        if(coord.X > 7 | coord.Y > 7 | coord.X < 0 | coord.y < 0) {
+            return false;
+        }
+        return true;
     }
 
 
