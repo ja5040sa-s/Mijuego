@@ -305,28 +305,28 @@ public class Board {
         while(it.hasNext()){
             check = it.next();
                if((Board[check.x][check.y-1] == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
-                   p1Available.add(new Coordinates(check.x,check.y));
+                   p1Available.add(new Coordinates(check.x,check.y-1));
                }
                if((Board[check.x-1][check.y]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
-                   p1Available.add(new Coordinates(check.x,check.y));
+                   p1Available.add(new Coordinates(check.x-1,check.y));
                }
                if((Board[check.x][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
-                   p1Available.add(new Coordinates(check.x,check.y));
+                   p1Available.add(new Coordinates(check.x,check.y+1));
                }
                if((Board[check.x+1][check.y]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
-                   p1Available.add(new Coordinates(check.x,check.y));
+                   p1Available.add(new Coordinates(check.x+1,check.y));
                }
                if((Board[check.x-1][check.y-1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
-                   p1Available.add(new Coordinates(check.x,check.y));
+                   p1Available.add(new Coordinates(check.x-1,check.y-1));
                }
                if((Board[check.x+1][check.y-1] == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
-                   p1Available.add(new Coordinates(check.x,check.y));
+                   p1Available.add(new Coordinates(check.x+1,check.y-1));
                }
                if((Board[check.x-1][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
-                   p1Available.add(new Coordinates(check.x,check.y));
+                   p1Available.add(new Coordinates(check.x-1,check.y+1));
                }
                if((Board[check.x+1][check.y+1]  == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
-                   p1Available.add(new Coordinates(check.x,check.y));
+                   p1Available.add(new Coordinates(check.x+1,check.y+1));
                }
         }
         return p1Available;
