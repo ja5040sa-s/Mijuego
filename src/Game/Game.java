@@ -28,7 +28,7 @@ public class Game {
 		}
 		
 		Board reversi = new Board();
-			 
+
 		while(reversi.isThereMoves()) {//This needs to be fixed
 			for (int i = 0; i < reversi.Board.length; i++) {
 			    for (int j = 0; j < reversi.Board.length; j++) {
