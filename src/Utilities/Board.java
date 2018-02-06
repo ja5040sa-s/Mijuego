@@ -76,6 +76,7 @@ public class Board {
         }
     }
 
+    //Probably all this flips could be split up in a check + flip function. Reusing the check function in the possible moves method
     private void flipRight(Coordinates coords, int color, int oppositeColor){
 
 		if(Board[coords.x+1][coords.y] == oppositeColor){
@@ -208,12 +209,9 @@ public class Board {
     }
 
     public void move(Coordinates coords, int color){
-    	//I won't check if the move is valid, I assume it is. For the algorithm it is right. We have to make sure that we also do this for the other player
-    	//Also assumed the coordenates are within a proper range.
-    	//We consider both coordinates to be in 0-7 range although y will be given in 1-8 range. Be careful!! Maybe modify constructor?
+ 
     	Board[coords.x][coords.y] = color;
 
-    	//I will try to do here the flipping algorithm. Maybe it has to be placed inside some other method/class? Coudl this also be simplified nesting functions?
     	int oppositeColor;
     	if(color == White){
     		oppositeColor = Black;
