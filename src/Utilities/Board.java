@@ -301,6 +301,7 @@ public class Board {
 
         //It checks every one of its pieces and the blank spaces surrounding them, if it is Blank it adds it to
         //the array with all the possible moves
+
         while(it.hasNext()){
             check = it.next();
                if((Board[check.x][check.y-1] == Blank) && (check.x>=0 && check.x<=7) && (check.y>=0 && check.y <= 7)){
