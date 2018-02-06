@@ -343,4 +343,13 @@ public class Board {
         }
         return false;
     }
+    
+    public boolean isThereMoves(int color) {
+    	ArrayList<Coordinates> moves = possibleMoves(color);
+    	if(moves.isEmpty()) {
+    		return false;
+    	} else {
+    		return true;
+    	}
+    }
 }
