@@ -52,9 +52,9 @@ public class Board {
         int y = 0;
 
         //Constructor
-        public Coordinates(char x, int y) {
-            this.x = ((int) 'a') - ((int) x);
-            this.y = y;
+        public Coordinates(char x, char y) {
+            this.x = ((int) x) - ((int) 'a');
+            this.y = ((int) y) - ((int) '1');
         }
 
         public Coordinates(int x, int y) {
@@ -68,24 +68,23 @@ public class Board {
         }
         
         public char getX() {
-        	return (char) ((int) 'a' + x);
+        	return ((char) (((int) 'a') + x));
         }
         
-        public int getY() {
-        	return (y + 1);
+        public char getY() {
+        	return ((char) (((int) '1') + y));
         }
     }
 
     private void flipRight(Coordinates coords, int color, int oppositeColor){
-    	int x_integer = ((int) 'a') - ((int) coords.x);
 
-		if(Board[x_integer+1][coords.y] == oppositeColor){
+		if(Board[coords.x+1][coords.y] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = x_integer + 2; i < Board.length; i++){
+			for(int i = coords.x + 2; i < Board.length; i++){
 				if(Board[i][coords.y] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
-					for(i = x_integer + 1; i < max; i++){
+					for(i = coords.x + 1; i < max; i++){
 						Board[i][coords.y] = color;
 					}
 					break;
@@ -94,16 +93,15 @@ public class Board {
 		}
     }
     private void flipLeft(Coordinates coords, int color, int oppositeColor){
-    	int x_integer = ((int) 'a') - ((int) coords.x);
 
     	//Check to the left of the piece
-		if(Board[x_integer-1][coords.y] == oppositeColor){
+		if(Board[coords.x-1][coords.y] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = x_integer - 2; i >= 0; i--){
+			for(int i = coords.x - 2; i >= 0; i--){
 				if(Board[i][coords.y] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
-					for(i = x_integer - 1; i > min; i--){
+					for(i = coords.x - 1; i > min; i--){
 						Board[i][coords.y] = color;
 					}
 					break;
@@ -112,13 +110,12 @@ public class Board {
 		}
     }
     private void flipUp(Coordinates coords, int color, int oppositeColor){
-    	int x_integer = ((int) 'a') - ((int) coords.x);
 
     	//Check upper
-		if(Board[x_integer][coords.y+1] == oppositeColor){
+		if(Board[coords.x][coords.y+1] == oppositeColor){
 			//Iterate to find a piece of our color
 			for(int i = coords.y + 2; i < Board.length; i++){
-				if(Board[x_integer][i] == color){
+				if(Board[coords.x][i] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
 					for(i = coords.y + 1; i < max; i++){
@@ -130,12 +127,11 @@ public class Board {
 		}
     }
     private void flipDown(Coordinates coords, int color, int oppositeColor){
-    	int x_integer = ((int) 'a') - ((int) coords.x);
 
-		if(Board[x_integer][coords.y-1] == oppositeColor){
+		if(Board[coords.x][coords.y-1] == oppositeColor){
 			//Iterate to find a piece of our color
 			for(int i = coords.y - 2; i >= 0; i--){
-				if(Board[x_integer][i] == color){
+				if(Board[coords.x][i] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
 					for(i = coords.y - 1; i > min; i--){
@@ -147,15 +143,14 @@ public class Board {
 		}
     }
     private void flipUpRight(Coordinates coords, int color, int oppositeColor){
-    	int x_integer = ((int) 'a') - ((int) coords.x);
     	//Check upper right corner
-		if(Board[x_integer+1][coords.y+1] == oppositeColor){
+		if(Board[coords.x+1][coords.y+1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = x_integer + 2,j = coords.y + 2; (i < Board.length) && (j < Board.length) ; i++,j++){
+			for(int i = coords.x + 2,j = coords.y + 2; (i < Board.length) && (j < Board.length) ; i++,j++){
 				if(Board[i][j] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
-					for(i = x_integer + 1,j = coords.y + 1; i < max; i++,j++){
+					for(i = coords.x + 1,j = coords.y + 1; i < max; i++,j++){
 						Board[i][j] = color;
 					}
 					break;
@@ -164,15 +159,14 @@ public class Board {
 		}
     }
     private void flipUpLeft(Coordinates coords, int color, int oppositeColor){
-    	int x_integer = ((int) 'a') - ((int) coords.x);
 
-    	if(Board[x_integer-1][coords.y+1] == oppositeColor){
+    	if(Board[coords.x-1][coords.y+1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = x_integer - 2,j = coords.y + 2; (i >= 0) && (j < Board.length) ; i--,j++){
+			for(int i = coords.x - 2,j = coords.y + 2; (i >= 0) && (j < Board.length) ; i--,j++){
 				if(Board[i][j] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
-					for(i = x_integer - 1,j = coords.y + 1; i > min; i--,j++){
+					for(i = coords.x - 1,j = coords.y + 1; i > min; i--,j++){
 						Board[i][j] = color;
 					}
 					break;
@@ -181,15 +175,14 @@ public class Board {
 		}
     }
     private void flipDownRight(Coordinates coords, int color, int oppositeColor){
-    	int x_integer = ((int) 'a') - ((int) coords.x);
 
-    	if(Board[x_integer+1][coords.y-1] == oppositeColor){
+    	if(Board[coords.x+1][coords.y-1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = x_integer + 2,j = coords.y - 2; (i < Board.length) && (j >= 0) ; i++,j--){
+			for(int i = coords.x + 2,j = coords.y - 2; (i < Board.length) && (j >= 0) ; i++,j--){
 				if(Board[i][j] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
-					for(i = x_integer + 1,j = coords.y - 1; i < max; i++,j--){
+					for(i = coords.x + 1,j = coords.y - 1; i < max; i++,j--){
 						Board[i][j] = color;
 					}
 					break;
@@ -198,15 +191,14 @@ public class Board {
 		}
     }
     private void flipDownLeft(Coordinates coords, int color, int oppositeColor){
-    	int x_integer = ((int) 'a') - ((int) coords.x);
 
-    	if(Board[x_integer-1][coords.y-1] == oppositeColor){
+    	if(Board[coords.x-1][coords.y-1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = x_integer - 2,j = coords.y - 2; (i >= 0) && (j >= 0) ; i--,j--){
+			for(int i = coords.x - 2,j = coords.y - 2; (i >= 0) && (j >= 0) ; i--,j--){
 				if(Board[i][j] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
-					for(i = x_integer - 1,j = coords.y - 1; i > min; i--,j--){
+					for(i = coords.x - 1,j = coords.y - 1; i > min; i--,j--){
 						Board[i][j] = color;
 					}
 					break;
@@ -219,8 +211,7 @@ public class Board {
     	//I won't check if the move is valid, I assume it is. For the algorithm it is right. We have to make sure that we also do this for the other player
     	//Also assumed the coordenates are within a proper range.
     	//We consider both coordinates to be in 0-7 range although y will be given in 1-8 range. Be careful!! Maybe modify constructor?
-    	int x_integer = ((int) 'a') - ((int) coords.x);
-    	Board[x_integer][coords.y] = color;
+    	Board[coords.x][coords.y] = color;
 
     	//I will try to do here the flipping algorithm. Maybe it has to be placed inside some other method/class? Coudl this also be simplified nesting functions?
     	int oppositeColor;
@@ -231,10 +222,10 @@ public class Board {
     		oppositeColor = White;
 
 
-    	if(x_integer < (Board.length-2)){
+    	if(coords.x < (Board.length-2)){
         	flipRight(coords, color, oppositeColor);
     	}
-    	if(x_integer > 1){
+    	if(coords.x > 1){
     		flipLeft(coords, color, oppositeColor);
     	}
     	if(coords.y < (Board.length - 2)){
@@ -243,16 +234,16 @@ public class Board {
     	if(coords.y > 1){
     		flipDown(coords, color, oppositeColor);
     	}
-    	if((coords.y > 1) && (x_integer > 1)){
+    	if((coords.y > 1) && (coords.x > 1)){
     		flipDownLeft(coords, color, oppositeColor);
     	}
-    	if((coords.y > 1) && (x_integer < (Board.length - 2))){
+    	if((coords.y > 1) && (coords.x < (Board.length - 2))){
     		flipDownRight(coords, color, oppositeColor);
     	}
-    	if((coords.y < (Board.length - 2)) && (x_integer > 1)){
+    	if((coords.y < (Board.length - 2)) && (coords.x > 1)){
     		flipUpLeft(coords, color, oppositeColor);
     	}
-    	if((coords.y < (Board.length -2)) && (x_integer < (Board.length - 2))){
+    	if((coords.y < (Board.length -2)) && (coords.x < (Board.length - 2))){
     		flipUpRight(coords, color, oppositeColor);
     	}
     }

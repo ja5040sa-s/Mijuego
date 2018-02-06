@@ -1,6 +1,7 @@
 package Utilities;
 
 import java.util.*;
+import java.io.*;
 
 public class Player {
     private int color = 0;
@@ -16,7 +17,8 @@ public class Player {
     public void move(Board board) {
 		Scanner reader = new Scanner(System.in);
 		char X;
-		int Y;
+		char Y;
+		String aux;
 		boolean check = true;
 		
 		System.out.println("Write where to place your piece");
@@ -26,12 +28,13 @@ public class Player {
 			System.out.print("Your possible moves are: ");
 			ArrayList<Board.Coordinates> playerMoves = board.possibleMoves(this.color);
 			for(Board.Coordinates move: playerMoves) {
-				System.out.print(move.getX() + move.getY() + " ");
+				System.out.printf("%c%c ",move.getX(),move.getY());
 			}
 			System.out.println();
 			
-			X = (char) reader.nextInt();
-			Y = reader.nextInt();
+			aux = reader.next();
+			X = aux.charAt(0); 
+			Y = aux.charAt(1);
 			for(Board.Coordinates move: playerMoves) {
 				if((move.getX() == X) && (move.getY() == Y)) {
 					board.move(board.new Coordinates(X,Y), this.color);
