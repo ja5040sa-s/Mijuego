@@ -37,10 +37,10 @@ public class Board {
     }
 
     //Copy constructor
-    public Board(Board copyBoard){
+    public void copyBoard(Board origBoard){
     	for(int i = 0; i < Board.length; i++){
-    		for(int j = 0; j < Board.length; i++){
-    	    	this.Board[i][j] = copyBoard.Board[i][j];
+    		for(int j = 0; j < Board.length; j++){
+    	    	this.Board[i][j] = origBoard.Board[i][j];
     		}
     	}
     }
@@ -135,7 +135,7 @@ public class Board {
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
 					for(i = coords.y - 1; i > min; i--){
-						Board[i][coords.y] = color;
+						Board[coords.x][i] = color;
 					}
 					break;
 				}
