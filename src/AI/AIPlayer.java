@@ -48,9 +48,6 @@ public class AIPlayer {
     	else {
     		return euristic(board);
     	}
-    	
-    	
-    			
 
     	//If we have reached the maximum depth, then we are in a min. Check all possible moves and return the minimum 
     	if(depth == this.maxdepth) {

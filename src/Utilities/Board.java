@@ -322,16 +322,16 @@ public class Board {
                 }
             }
 
-            if(check.y <= 6)
+            if(check.y <= 5) {
                 if(Board[check.x][check.y+1] == player2) {
                     if ((Board[check.x][check.y + 2] == Blank)) {
                         p1Available.add(new Coordinates(check.x, check.y + 2));
                     }
                 }
             }
-            if(check.x <= 6){
+            if(check.x <= 5){
                 if(Board[check.x+1][check.y] == player2) {
-                    if ((Board[check.x + 2][check.y]) && (Board[check.x + 2][check.y] == Blank)) {
+                    if ((Board[check.x + 2][check.y] == Blank)) {
                         p1Available.add(new Coordinates(check.x + 2, check.y));
                     }
                 }
@@ -345,7 +345,7 @@ public class Board {
                 }
             }
 
-            if(check.x <=6 && check.y >=2){
+            if(check.x <=5 && check.y >=2){
                 if(Board[check.x+1][check.y-1] == player2) {
                     if (Board[check.x + 2][check.y - 2] == Blank) {
                         p1Available.add(new Coordinates(check.x + 2, check.y - 2));
@@ -353,7 +353,7 @@ public class Board {
                 }
             }
 
-            if(check.x >=2 && check.y<=6){
+            if(check.x >=2 && check.y<=5){
                 if(Board[check.x-1][check.y+1] == player2) {
                     if(Board[check.x - 2][check.y + 2] == Blank) {
                         p1Available.add(new Coordinates(check.x - 2, check.y + 2));
@@ -361,7 +361,7 @@ public class Board {
                 }
             }
 
-            if(check.x <=6 && check.y <=6){
+            if(check.x <=5 && check.y <=5){
                 if(Board[check.x+1][check.y+1] == player2) {
                     if(Board[check.x + 2][check.y + 2] == Blank) {
                         p1Available.add(new Coordinates(check.x + 2, check.y + 2));

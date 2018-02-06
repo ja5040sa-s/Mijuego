@@ -46,8 +46,12 @@ public class Game {
 				machine.move(reversi);
 			}
 			
-			for (int j = 0; j < reversi.Board.length; j++) {
-				for (int i = (reversi.Board.length - 1); i >= 0; i--) {
+			
+			
+			
+			for (int j = (reversi.Board.length - 1); j >= 0; j--) {
+				for (int i = 0; i < reversi.Board.length ; i++) {
+
 			        System.out.print(reversi.Board[i][j] + " ");
 			    }
 			    System.out.println();
@@ -58,6 +62,8 @@ public class Game {
 			} else {
 				human.move(reversi);
 			}
+			System.out.println("Another move");
+			System.out.println();
 			
 		}
 	}
