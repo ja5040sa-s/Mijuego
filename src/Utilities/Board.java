@@ -119,7 +119,7 @@ public class Board {
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
 					for(i = coords.y + 1; i < max; i++){
-						Board[i][coords.y] = color;
+						Board[coords.x][i] = color;
 					}
 					break;
 				}
