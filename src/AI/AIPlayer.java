@@ -8,10 +8,17 @@ public class AIPlayer {
 
     private int color = 0;
     private int maxdepth = 8;
+    private int oppositeColor = 0;
 
     //Constructor
     public AIPlayer(int color) {
     	this.color = color;
+    	
+    	if(color == Board.White){
+    		oppositeColor = Board.Black;
+    	}
+    	else
+    		oppositeColor = Board.White;
     }
     
     public int getColor() {
@@ -25,15 +32,32 @@ public class AIPlayer {
 
     }*/
     private int minMax(Board board, int depth) {
+    	
+    	int color_this_call;
+    	if((depth % 2) == 1)
+    		color_this_call = oppositeColor;
+    	else
+    		color_this_call = color;
+    	
     	ArrayList<Integer> values = new ArrayList<Integer>();
+    	ArrayList<Board.Coordinates> moves;
     	//Check possible moves
-    	ArrayList<Board.Coordinates> moves = board.possibleMoves(this.color);
+    	if(board.isThereMoves(color_this_call)) {
+    		 moves = board.possibleMoves(color_this_call);
+    	} 
+    	else {
+    		return euristic(board);
+    	}
+    	
+    	
+    			
 
     	//If we have reached the maximum depth, then we are in a min. Check all possible moves and return the minimum 
     	if(depth == this.maxdepth) {
     		for(Board.Coordinates nextMove : moves) {
-        		Board localBoard = new Board(board);
-    			localBoard.move(nextMove,color);
+    			Board localBoard = new Board();
+            	localBoard.copyBoard(board);
+    			localBoard.move(nextMove,color_this_call);
     			values.add(euristic(localBoard));
     		}
     		return Collections.min(values);
@@ -41,8 +65,9 @@ public class AIPlayer {
     	
     	//If we are not in a maximum depth, do every move and call corresponding function. Then check all the values and decide
     	for(Board.Coordinates nextMove : moves){
-    		Board localBoard = new Board(board);
-    		localBoard.move(nextMove,color);
+    		Board localBoard = new Board();
+        	localBoard.copyBoard(board);
+    		localBoard.move(nextMove,color_this_call);
     		values.add(minMax(localBoard,depth + 1));
     	}
 
@@ -76,12 +101,15 @@ public class AIPlayer {
     }
     
     public void move(Board board) {
+    	
+    	
     	int depth = 0;
     	ArrayList<Board.Coordinates> moves = board.possibleMoves(this.color);
     	ArrayList<Integer> values = new ArrayList<Integer>();
 
     	for(Board.Coordinates nextMove : moves){
-    		Board localBoard = new Board(board);
+    		Board localBoard = new Board();
+        	localBoard.copyBoard(board);
     		localBoard.move(nextMove,color);
     		values.add(minMax(localBoard,depth + 1));
     	}
