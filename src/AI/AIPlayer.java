@@ -7,12 +7,14 @@ import Utilities.*;
 public class AIPlayer {
 
     private int color = 0;
-    private int maxdepth = 8;
+    private int maxdepth = 4;
     private int oppositeColor = 0;
 
     //Constructor
     public AIPlayer(int color) {
     	this.color = color;
+    	//We make sure that maxdepth is even, so it is congruent with our needs (starts in zero)
+    	this.maxdepth = 2*this.maxdepth - 1;
     	
     	if(color == Board.White){
     		oppositeColor = Board.Black;
@@ -40,18 +42,15 @@ public class AIPlayer {
     		color_this_call = color;
     	
     	ArrayList<Integer> values = new ArrayList<Integer>();
-    	ArrayList<Board.Coordinates> moves;
-    	//Check possible moves
-    	if(board.isThereMoves(color_this_call)) {
-    		 moves = board.possibleMoves(color_this_call);
-    	} 
-    	else {
+    	ArrayList<Coordinates> moves = board.possibleMoves(color_this_call);
+    	//Check if there are available moves
+    	if(moves.isEmpty())
     		return euristic(board);
-    	}
+    	
 
     	//If we have reached the maximum depth, then we are in a min. Check all possible moves and return the minimum 
     	if(depth == this.maxdepth) {
-    		for(Board.Coordinates nextMove : moves) {
+    		for(Coordinates nextMove : moves) {
     			Board localBoard = new Board();
             	localBoard.copyBoard(board);
     			localBoard.move(nextMove,color_this_call);
@@ -61,7 +60,7 @@ public class AIPlayer {
     	}
     	
     	//If we are not in a maximum depth, do every move and call corresponding function. Then check all the values and decide
-    	for(Board.Coordinates nextMove : moves){
+    	for(Coordinates nextMove : moves){
     		Board localBoard = new Board();
         	localBoard.copyBoard(board);
     		localBoard.move(nextMove,color_this_call);
@@ -101,17 +100,17 @@ public class AIPlayer {
     	
     	
     	int depth = 0;
-    	ArrayList<Board.Coordinates> moves = board.possibleMoves(this.color);
+    	ArrayList<Coordinates> moves = board.possibleMoves(this.color);
     	ArrayList<Integer> values = new ArrayList<Integer>();
 
-    	for(Board.Coordinates nextMove : moves){
+    	for(Coordinates nextMove : moves){
     		Board localBoard = new Board();
         	localBoard.copyBoard(board);
     		localBoard.move(nextMove,color);
     		values.add(minMax(localBoard,depth + 1));
     	}
     	
-    	Board.Coordinates bestMove = moves.get(values.indexOf(Collections.max(values)));
+    	Coordinates bestMove = moves.get(values.indexOf(Collections.max(values)));
     	
     	board.move(bestMove, color);
     	

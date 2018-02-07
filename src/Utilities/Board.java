@@ -16,24 +16,6 @@ public class Board {
 
     public Board(){
         Board = new int[8][8];
-        int i = 0;
-        int j = 0;
-
-        for(i=0;i<8;i++){
-            for(j=0;j<8;j++){
-               if(i == 3 && j == 3) {
-                   Board[i][j] = White;
-               }else if(i == 4 && j == 4) {
-                   Board[i][j] = White;
-               }else if(i == 3 && j == 4) {
-                   Board[i][j] = Black;
-               }else if(i == 4 && j == 3) {
-                   Board[i][j] = Black;
-               }else  {
-                   Board[i][j] = Blank;
-               }
-            }
-        }
     }
 
     //Copy constructor
@@ -43,37 +25,6 @@ public class Board {
     	    	this.Board[i][j] = origBoard.Board[i][j];
     		}
     	}
-    }
-
-    public class Coordinates {
-
-        //Coordinates
-        int x = 0;
-        int y = 0;
-
-        //Constructor
-        public Coordinates(char x, char y) {
-            this.x = ((int) x) - ((int) 'a');
-            this.y = ((int) y) - ((int) '1');
-        }
-
-        public Coordinates(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public Coordinates() {
-            x = 0;
-            y = 0;
-        }
-        
-        public char getX() {
-        	return ((char) (((int) 'a') + x));
-        }
-        
-        public char getY() {
-        	return ((char) (((int) '1') + y));
-        }
     }
 
     //Probably all this flips could be split up in a check + flip function. Reusing the check function in the possible moves method
@@ -293,7 +244,7 @@ public class Board {
 
         ArrayList<Coordinates> p1 = new ArrayList<Coordinates>();
         p1 = p1Pieces(player);
-        ArrayList<Coordinates> p1Available = new ArrayList<Coordinates>();
+        Set<Coordinates> p1Available = new HashSet<Coordinates>();
         Coordinates check = new Coordinates();
         Iterator<Coordinates> it = p1.iterator();
 
@@ -340,7 +291,7 @@ public class Board {
             if(check.x >=2 && check.y >=2){
                 if(Board[check.x-1][check.y-1] == player2) {
                     if (Board[check.x - 2][check.y - 2] == Blank) {
-                        p1Available.add(new Coordinates(check.x, check.y - 2));
+                        p1Available.add(new Coordinates(check.x - 2, check.y - 2));
                     }
                 }
             }
@@ -370,7 +321,7 @@ public class Board {
             }
 
         }
-        return p1Available;
+        return new ArrayList<Coordinates>(p1Available);
     }
     private boolean isInside(Coordinates coord) {
 
@@ -400,4 +351,22 @@ public class Board {
     		return true;
     	}
     }
+    
+   public void startGame() {
+	   for(int i=0;i<8;i++){
+           for(int j=0;j<8;j++){
+              if(i == 3 && j == 3) {
+                  this.Board[i][j] = Black;
+              }else if(i == 4 && j == 4) {
+                  this.Board[i][j] = Black;
+              }else if(i == 3 && j == 4) {
+                  this.Board[i][j] = White;
+              }else if(i == 4 && j == 3) {
+                  this.Board[i][j] = White;
+              }else  {
+                  this.Board[i][j] = Blank;
+              }
+           }
+       }
+   }
 }

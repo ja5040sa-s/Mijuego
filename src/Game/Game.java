@@ -29,8 +29,8 @@ public class Game {
 		}
 		
 		Board reversi = new Board();
-
-		while(reversi.isThereMoves()) {//This needs to be fixed
+		reversi.startGame();
+		while(reversi.isThereMoves(human.getColor()) || reversi.isThereMoves(machine.getColor())) {
 
 			for (int j = (reversi.Board.length - 1); j >= 0; j--) {
 				for (int i = 0; i < reversi.Board.length ; i++) {
@@ -44,6 +44,8 @@ public class Game {
 				human.move(reversi);
 			} else {
 				machine.move(reversi);
+				System.out.println("Another move");
+				System.out.println();
 			}
 			
 			
@@ -59,11 +61,12 @@ public class Game {
 			
 			if(human.getColor() == Board.Black) {
 				machine.move(reversi);
+				System.out.println("Another move");
+				System.out.println();
 			} else {
 				human.move(reversi);
 			}
-			System.out.println("Another move");
-			System.out.println();
+			
 			
 		}
 	}
