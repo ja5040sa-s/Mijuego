@@ -1,6 +1,7 @@
 package AI;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.*;
 
 import Utilities.*;
 
@@ -29,7 +30,9 @@ public class AIPlayer {
     	return this.color;
     }
 
-    private int minMax(Board board, int depth) {
+    private int minMax(Board board, int depth, int ref_value) {
+    	int checkValue;
+    	ArrayList<Integer> values;
     	
     	if((System.nanoTime()/1000000 -  startTime) > maxTime){
     		System.out.println("The algorithm ran out of time");
@@ -37,12 +40,14 @@ public class AIPlayer {
     	}
     	
     	int color_this_call;
-    	if((depth % 2) == 1)
+    	if((depth % 2) == 1){
     		color_this_call = oppositeColor;
-    	else
+    		values = new ArrayList<Integer>(Arrays.asList(Integer.MAX_VALUE));
+    	}	
+    	else{
     		color_this_call = color;
-    	
-    	ArrayList<Integer> values = new ArrayList<Integer>();
+    		values = new ArrayList<Integer>(Arrays.asList(Integer.MIN_VALUE));
+    	}
     	ArrayList<Coordinates> moves = board.possibleMoves(color_this_call);
     	//Check if there are available moves
     	
@@ -52,29 +57,50 @@ public class AIPlayer {
     		if(moves.isEmpty()){
         		return heruistic(board);
         	}
-    		
+        	values = new ArrayList<Integer>();
+
     		for(Coordinates nextMove : moves) {
     			Board localBoard = new Board();
             	localBoard.copyBoard(board);
     			localBoard.move(nextMove,color_this_call);
-    			values.add(heruistic(localBoard));
+    			
+    			checkValue = heruistic(localBoard);
+    			if(ref_value >= checkValue)
+    				return Integer.MIN_VALUE;
+    			else
+    				values.add(checkValue);
     		}
     		return Collections.min(values);
     	}
     	
     	//If we are not in a maximum depth, do every move and call corresponding function. Then check all the values and decide
     	if(moves.isEmpty()){
-    		return minMax(board,depth+1);
+    		return minMax(board,depth+1,1);//Fix
     	}
     	
     	for(Coordinates nextMove : moves){
     		Board localBoard = new Board();
         	localBoard.copyBoard(board);
     		localBoard.move(nextMove,color_this_call);
-    		values.add(minMax(localBoard,depth + 1));
+    		
+    		//Check if we are in min or max to avoid keeping with the for if needed.
+    		if((depth % 2) == 1){
+        		checkValue = minMax(localBoard,depth + 1,Collections.min(values));
+    			if(ref_value >= checkValue)
+    				return Integer.MIN_VALUE;
+    			else
+    				values.add(checkValue);
+    		}
+    		else{
+        		checkValue = minMax(localBoard,depth + 1,Collections.max(values));
+    			if(ref_value <= checkValue)
+    				return Integer.MAX_VALUE;
+    			else
+    				values.add(checkValue);
+    		}
     	}
 
-		//We start with depth of 1 (as a convention) , which is min
+		//We start with depth of 1 (as 0 is the inizialization, max) , which is min
 		if((depth % 2) == 1)
 			return Collections.min(values);
 		else
@@ -115,16 +141,14 @@ public class AIPlayer {
     		System.out.println("AI cannot move, human player turn again");
     	}
     	else{
-    		ArrayList<Integer> values = new ArrayList<Integer>();
-	    	
-    		for(Coordinates nextMove : moves){
-	    		Board localBoard = new Board();
-	        	localBoard.copyBoard(board);
-	    		localBoard.move(nextMove,color);
-	    		values.add(minMax(localBoard,depth + 1));
-	    	}
-	    	
-	    	Coordinates bestMove = moves.get(values.indexOf(Collections.max(values)));
+    		ArrayList<Integer> values = new ArrayList<Integer>(Arrays.asList(Integer.MIN_VALUE));
+	    	for(Coordinates nextMove : moves){
+		    	Board localBoard = new Board();
+		       	localBoard.copyBoard(board);
+		    	localBoard.move(nextMove,color);
+		    	values.add(minMax(localBoard,depth + 1,Collections.max(values)));
+		    }
+	    	Coordinates bestMove = moves.get(values.indexOf(Collections.max(values))+1);
 	    	System.out.println();
 	    	System.out.println("The AI move is: " + bestMove.getX() + bestMove.getY());
 	    	board.move(bestMove, color);
