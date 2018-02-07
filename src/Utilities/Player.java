@@ -23,26 +23,30 @@ public class Player {
 		
 		System.out.println("Write where to place your piece");
 		
-		
-		do{
-			System.out.print("Your possible moves are: ");
-			ArrayList<Board.Coordinates> playerMoves = board.possibleMoves(this.color);
-			for(Board.Coordinates move: playerMoves) {
-				System.out.printf("%c%c ",move.getX(),move.getY());
-			}
-			System.out.println();
-			
-			aux = reader.next();
-			X = aux.charAt(0); 
-			Y = aux.charAt(1);
-			for(Board.Coordinates move: playerMoves) {
-				if((move.getX() == X) && (move.getY() == Y)) {
-					board.move(board.new Coordinates(X,Y), this.color);
-					check = false;
+		ArrayList<Coordinates> playerMoves = board.possibleMoves(this.color);
+		if(playerMoves.isEmpty()) {
+			System.out.println("You have no possible moves, your adversary will continue playing");
+		}
+		else {
+			do{
+				System.out.print("Your possible moves are: ");
+				for(Coordinates move: playerMoves) {
+					System.out.printf("%c%c ",move.getX(),move.getY());
 				}
+				System.out.println();
 				
-			}
-		}while(check);
+				aux = reader.next();
+				X = aux.charAt(0); 
+				Y = aux.charAt(1);
+				for(Coordinates move: playerMoves) {
+					if((move.getX() == X) && (move.getY() == Y)) {
+						board.move(new Coordinates(X,Y), this.color);
+						check = false;
+					}
+					
+				}
+			}while(check);
+		}
     }
 
 }
