@@ -349,13 +349,13 @@ public class Board {
 	   for(int i=0;i<8;i++){
            for(int j=0;j<8;j++){
               if(i == 3 && j == 3) {
-                  this.Board[i][j] = Black;
+                  this.Board[i][j] = White;
               }else if(i == 4 && j == 4) {
-                  this.Board[i][j] = Black;
+                  this.Board[i][j] = White;
               }else if(i == 3 && j == 4) {
-                  this.Board[i][j] = White;
+                  this.Board[i][j] = Black;
               }else if(i == 4 && j == 3) {
-                  this.Board[i][j] = White;
+                  this.Board[i][j] = Black;
               }else  {
                   this.Board[i][j] = Blank;
               }

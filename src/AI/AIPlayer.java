@@ -16,7 +16,7 @@ public class AIPlayer {
     	this.color = color;
     	//We make sure that maxdepth is even, so it is congruent with our needs (starts in zero)
     	this.maxdepth = 2*this.maxdepth - 1;
-    	this.maxTime = time*1000000000;
+    	this.maxTime = time*1000;
     	
     	if(color == Board.White){
     		oppositeColor = Board.Black;
@@ -31,7 +31,7 @@ public class AIPlayer {
 
     private int minMax(Board board, int depth) {
     	
-    	if((System.nanoTime() -  startTime) > maxTime){
+    	if((System.nanoTime()/1000000 -  startTime) > maxTime){
     		System.out.println("The algorithm ran out of time");
     		return heruistic(board);
     	}
@@ -106,7 +106,7 @@ public class AIPlayer {
     }
     
     public void move(Board board) {
-    	startTime = System.nanoTime();
+    	startTime = System.nanoTime()/1000000;
     	
     	int depth = 0;
     	ArrayList<Coordinates> moves = board.possibleMoves(this.color);
