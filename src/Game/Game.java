@@ -10,6 +10,7 @@ public class Game {
 	public static void main(String[] args) {
 		Scanner reader = new Scanner(System.in);
 		String color;
+		int thinkTime;
 		AIPlayer machine;
 		Player human;
 		
@@ -20,12 +21,18 @@ public class Game {
 		} while(!(color.equals("White") || color.equals("Black")));
 		
 		System.out.println("Colors have been chosen");
+		
+		do{
+			System.out.println("Choose how many seconds the algorithm will have to \"think\" (min 5)");
+			thinkTime = reader.nextInt();
+		}while(thinkTime < 5);
+		
 		if(color.equals("White")) {
 			human = new Player(Board.White);
-			machine =  new AIPlayer(Board.Black);
+			machine =  new AIPlayer(Board.Black,thinkTime);
 		} else {
 			human = new Player(Board.Black);
-			machine = new AIPlayer(Board.White);
+			machine = new AIPlayer(Board.White,thinkTime);
 		}
 		
 		Board reversi = new Board();
@@ -69,7 +76,27 @@ public class Game {
 		
 			
 		}
+		int count = 0;
+		for(int i = 0; i < reversi.Board.length; i++){
+			for(int j = 0; j < reversi.Board.length; j++){
+				if(reversi.Board[i][j] == human.getColor())
+					count++;
+				else
+					count--;
+			}
+		}
+		if(count == 0){
+			System.out.println("The game was a draw.");
+			if(count > 0){
+				System.out.println("Congratulations!! You win.");
+			}
+			else{
+				System.out.println("Sorry, you lose.");
+			}
+		}
+		
 		reader.close();
+		System.out.println("Thank you for playing!");
 	}
 
 

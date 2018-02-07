@@ -212,7 +212,7 @@ public class Board {
 
     }*/
 
-    private ArrayList<Coordinates> p1Pieces(int player){
+    private ArrayList<Coordinates> pieces(int player){
         ArrayList<Coordinates> p1pieces = new ArrayList<Coordinates>();
 
         for(int i=0; i< Board.length;i++){
@@ -235,7 +235,7 @@ public class Board {
         }
 
         ArrayList<Coordinates> p1 = new ArrayList<Coordinates>();
-        p1 = p1Pieces(player);
+        p1 = pieces(player);
         Set<Coordinates> p1Available = new HashSet<Coordinates>();
         Coordinates check = new Coordinates();
         Iterator<Coordinates> it = p1.iterator();
