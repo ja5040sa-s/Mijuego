@@ -7,6 +7,19 @@ public class Game {
 	public static int player1;
 	public static int player2;
 	
+	public static void print(Board reversi){
+		for (int j = 0; j < reversi.Board.length; j++) {
+			System.out.print(j+1 + " | ");
+			for (int i = 0; i < reversi.Board.length ; i++) {
+
+		        System.out.print(reversi.Board[i][j] + " ");
+		    }
+			System.out.print("|");
+		    System.out.println();
+		}
+		System.out.println("    a b c d e f g h  ");
+	}
+	
 	public static void main(String[] args) {
 		Scanner reader = new Scanner(System.in);
 		String color;
@@ -37,18 +50,10 @@ public class Game {
 		
 		Board reversi = new Board();
 		reversi.startGame();
-		while(reversi.isThereMoves(human.getColor()) || reversi.isThereMoves(machine.getColor())) {
-
-			for (int j = 0; j < reversi.Board.length; j++) {
-				System.out.print(j+1 + " | ");
-				for (int i = 0; i < reversi.Board.length ; i++) {
-
-			        System.out.print(reversi.Board[i][j] + " ");
-			    }
-				System.out.print("|");
-			    System.out.println();
-			}
-			System.out.println("    a b c d e f g h  ");
+		print(reversi);
+		
+		
+		do{
 			
 			if(human.getColor() == Board.Black) {
 				human.move(reversi);
@@ -56,19 +61,7 @@ public class Game {
 				machine.move(reversi);
 			}
 			
-			
-			
-			
-			for (int j = 0; j < reversi.Board.length; j++) {
-				System.out.print(j+1 + " | ");
-				for (int i = 0; i < reversi.Board.length ; i++) {
-
-			        System.out.print(reversi.Board[i][j] + " ");
-			    }
-				System.out.print("|");
-			    System.out.println();
-			}
-			System.out.println("    a b c d e f g h  ");
+			print(reversi);
 			
 			if(human.getColor() == Board.Black) {
 				machine.move(reversi);
@@ -76,10 +69,12 @@ public class Game {
 			} else {
 				human.move(reversi);
 			}
+			
+			print(reversi);
 			
 		
 			
-		}
+		}while(reversi.isThereMoves(human.getColor()) || reversi.isThereMoves(machine.getColor()));
 		
 		System.out.println("The game is finished");
 		int count = 0;
@@ -91,8 +86,11 @@ public class Game {
 					count--;
 			}
 		}
+		
 		if(count == 0){
 			System.out.println("The game was a draw.");
+		}
+		else{
 			if(count > 0){
 				System.out.println("Congratulations!! You win.");
 			}
