@@ -85,22 +85,24 @@ public class AIPlayer {
     }
     
     private int heruistic(Board board) {
-    	int whites = 0;
-    	int blacks = 0;
+    	int count = 0;
+    	int mycolor = 0;
     	
     	for(int i = 0; i < board.Board.length; i++){
     		for(int j = 0; j < board.Board.length; j++){
-	    		if(board.Board[i][j] == Board.White)
-	    			whites = whites + 1;
-	    		if(board.Board[i][j] == Board.Black)
-	    			blacks = blacks + 1;
+	    		if(board.Board[i][j] == this.color){
+	    			count++;
+	    			mycolor++;
+	    		}
+	    		if(board.Board[i][j] == this.oppositeColor)
+	    			count--;
     		}
     	}
     
-    	if(this.color == Board.White)
-    		return whites - blacks;
+    	if(count == mycolor)
+    		return Integer.MAX_VALUE;
     	else
-    		return blacks - whites;
+    		return count;
     }
     
     public void move(Board board) {
@@ -123,8 +125,8 @@ public class AIPlayer {
 	    	}
 	    	
 	    	Coordinates bestMove = moves.get(values.indexOf(Collections.max(values)));
-	    	System.out.println("The AI move is: " + bestMove.getX() + bestMove.getY());
 	    	System.out.println();
+	    	System.out.println("The AI move is: " + bestMove.getX() + bestMove.getY());
 	    	board.move(bestMove, color);
     	}
     	

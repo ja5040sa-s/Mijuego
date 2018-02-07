@@ -21,19 +21,20 @@ public class Player {
 		String aux;
 		boolean check = true;
 		
-		System.out.println("Write where to place your piece");
 		
 		ArrayList<Coordinates> playerMoves = board.possibleMoves(this.color);
 		if(playerMoves.isEmpty()) {
 			System.out.println("You have no possible moves, your adversary will continue playing");
 		}
 		else {
-			do{
+			do{				
+				System.out.println();
 				System.out.print("Your possible moves are: ");
 				for(Coordinates move: playerMoves) {
 					System.out.printf("%c%c ",move.getX(),move.getY());
 				}
-				System.out.println();
+				System.out.println("Write where to place your piece");
+
 				
 				aux = reader.next();
 				X = aux.charAt(0); 
