@@ -111,7 +111,8 @@ public class AIPlayer {
     	}
     	
     	Coordinates bestMove = moves.get(values.indexOf(Collections.max(values)));
-    	
+    	System.out.println("The AI move is: " + bestMove.getX() + bestMove.getY());
+    	System.out.println();
     	board.move(bestMove, color);
     	
     	//Still have to decide what this returns, if the move or the board with the move done.

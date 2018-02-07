@@ -1,7 +1,7 @@
 package Utilities;
 
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Player {
     private int color = 0;
@@ -47,6 +47,7 @@ public class Player {
 				}
 			}while(check);
 		}
+		//reader.close();
     }
 
 }

@@ -61,14 +61,15 @@ public class Game {
 			
 			if(human.getColor() == Board.Black) {
 				machine.move(reversi);
-				System.out.println("Another move");
-				System.out.println();
+
 			} else {
 				human.move(reversi);
 			}
 			
+		
 			
 		}
+		reader.close();
 	}
 
 

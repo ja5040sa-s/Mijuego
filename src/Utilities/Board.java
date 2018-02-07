@@ -30,133 +30,125 @@ public class Board {
     //Probably all this flips could be split up in a check + flip function. Reusing the check function in the possible moves method
     private void flipRight(Coordinates coords, int color, int oppositeColor){
 
-		if(Board[coords.x+1][coords.y] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = coords.x + 2; i < Board.length; i++){
-				if(Board[i][coords.y] == color){
+			for(int i = coords.x + 1; (i < Board.length-1) && Board[i][coords.y] == oppositeColor; i++){
+				if(Board[i+1][coords.y] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
-					for(i = coords.x + 1; i < max; i++){
+					for(i = coords.x + 1; i <= max; i++){
 						Board[i][coords.y] = color;
 					}
 					break;
 				}
 			}
-		}
+		
     }
     private void flipLeft(Coordinates coords, int color, int oppositeColor){
 
     	//Check to the left of the piece
-		if(Board[coords.x-1][coords.y] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = coords.x - 2; i >= 0; i--){
-				if(Board[i][coords.y] == color){
+			for(int i = coords.x - 1; i > 0 && Board[i][coords.y] == oppositeColor; i--){
+				if(Board[i-1][coords.y] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
-					for(i = coords.x - 1; i > min; i--){
+					for(i = coords.x - 1; i >= min; i--){
 						Board[i][coords.y] = color;
 					}
 					break;
 				}
 			}
-		}
+		
     }
     private void flipUp(Coordinates coords, int color, int oppositeColor){
 
     	//Check upper
-		if(Board[coords.x][coords.y+1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = coords.y + 2; i < Board.length; i++){
-				if(Board[coords.x][i] == color){
+			for(int i = coords.y + 1; i < (Board.length-1) && Board[coords.x][i] == oppositeColor; i++){
+				if(Board[coords.x][i+1] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
-					for(i = coords.y + 1; i < max; i++){
+					for(i = coords.y + 1; i <= max; i++){
 						Board[coords.x][i] = color;
 					}
 					break;
 				}
 			}
-		}
+		
     }
     private void flipDown(Coordinates coords, int color, int oppositeColor){
 
-		if(Board[coords.x][coords.y-1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = coords.y - 2; i >= 0; i--){
-				if(Board[coords.x][i] == color){
+			for(int i = coords.y - 1; i > 0 && Board[coords.x][i] == oppositeColor; i--){
+				if(Board[coords.x][i-1] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
-					for(i = coords.y - 1; i > min; i--){
+					for(i = coords.y - 1; i >= min; i--){
 						Board[coords.x][i] = color;
 					}
 					break;
 				}
 			}
-		}
+		
     }
     private void flipUpRight(Coordinates coords, int color, int oppositeColor){
     	//Check upper right corner
-		if(Board[coords.x+1][coords.y+1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = coords.x + 2,j = coords.y + 2; (i < Board.length) && (j < Board.length) ; i++,j++){
-				if(Board[i][j] == color){
+			for(int i = coords.x + 1,j = coords.y + 1; (i < (Board.length - 1)) && (j < (Board.length-1)) && Board[i][j] == oppositeColor; i++,j++){
+				if(Board[i+1][j+1] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
-					for(i = coords.x + 1,j = coords.y + 1; i < max; i++,j++){
+					for(i = coords.x + 1,j = coords.y + 1; i <= max; i++,j++){
 						Board[i][j] = color;
 					}
 					break;
 				}
 			}
-		}
+		
     }
     private void flipUpLeft(Coordinates coords, int color, int oppositeColor){
 
-    	if(Board[coords.x-1][coords.y+1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = coords.x - 2,j = coords.y + 2; (i >= 0) && (j < Board.length) ; i--,j++){
-				if(Board[i][j] == color){
+			for(int i = coords.x - 1,j = coords.y + 1; (i > 0) && (j < Board.length - 1) && Board[i][j] == oppositeColor; i--,j++){
+				if(Board[i-1][j+1] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
-					for(i = coords.x - 1,j = coords.y + 1; i > min; i--,j++){
+					for(i = coords.x - 1,j = coords.y + 1; i >= min; i--,j++){
 						Board[i][j] = color;
 					}
 					break;
 				}
 			}
-		}
+		
     }
     private void flipDownRight(Coordinates coords, int color, int oppositeColor){
 
-    	if(Board[coords.x+1][coords.y-1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = coords.x + 2,j = coords.y - 2; (i < Board.length) && (j >= 0) ; i++,j--){
-				if(Board[i][j] == color){
+			for(int i = coords.x + 1,j = coords.y - 1; (i < Board.length - 1) && (j > 0) && Board[i][j] == oppositeColor; i++,j--){
+				if(Board[i+1][j-1] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
-					for(i = coords.x + 1,j = coords.y - 1; i < max; i++,j--){
+					for(i = coords.x + 1,j = coords.y - 1; i <= max; i++,j--){
 						Board[i][j] = color;
 					}
 					break;
 				}
 			}
 		}
-    }
+    
     private void flipDownLeft(Coordinates coords, int color, int oppositeColor){
 
-    	if(Board[coords.x-1][coords.y-1] == oppositeColor){
 			//Iterate to find a piece of our color
-			for(int i = coords.x - 2,j = coords.y - 2; (i >= 0) && (j >= 0) ; i--,j--){
-				if(Board[i][j] == color){
+			for(int i = coords.x - 1,j = coords.y - 1; (i > 0) && (j > 0) && Board[i][j] == oppositeColor; i--,j--){
+				if(Board[i-1][j-1] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
-					for(i = coords.x - 1,j = coords.y - 1; i > min; i--,j--){
+					for(i = coords.x - 1,j = coords.y - 1; i >= min; i--,j--){
 						Board[i][j] = color;
 					}
 					break;
 				}
 			}
-		}
+		
     }
 
     public void move(Coordinates coords, int color){
@@ -197,7 +189,7 @@ public class Board {
     	}
     }
 
-    private ArrayList<Coordinates> p2Pieces(int player){
+    /*private ArrayList<Coordinates> p2Pieces(int player){
 
         int player2;
         if (player == Black){
@@ -218,7 +210,7 @@ public class Board {
         }
         return p2pieces;
 
-    }
+    }*/
 
     private ArrayList<Coordinates> p1Pieces(int player){
         ArrayList<Coordinates> p1pieces = new ArrayList<Coordinates>();
@@ -258,64 +250,65 @@ public class Board {
         //The first if is checking there is at least 2 spaces in under the piece cos that is the minimum requiered to make a move, the other player piece
         //and the space to put yours to eat that piece
             if(check.y >= 2){
-                if(Board[check.x][check.y-1] == player2) {
-                    if ((Board[check.x][check.y - 2] == Blank)) {
-                        p1Available.add(new Coordinates(check.x, check.y - 2));
+                for(int i = check.y - 1; (Board[check.x][i] == player2) && (i > 0); i--){
+                    if ((Board[check.x][i-1] == Blank)) {
+                        p1Available.add(new Coordinates(check.x,i-1));
                     }
                 }
             }
 
             if(check.x >=2){
-                if(Board[check.x-1][check.y] == player2) {
-                    if (Board[check.x - 2][check.y] == Blank) {
-                        p1Available.add(new Coordinates(check.x - 2, check.y));
+                for(int i = check.x - 1; (Board[i][check.y] == player2) && (i > 0); i--){
+                    if (Board[i-1][check.y] == Blank) {
+                        p1Available.add(new Coordinates(i-1, check.y));
                     }
                 }
             }
 
             if(check.y <= 5) {
-                if(Board[check.x][check.y+1] == player2) {
-                    if ((Board[check.x][check.y + 2] == Blank)) {
-                        p1Available.add(new Coordinates(check.x, check.y + 2));
+                for(int i = check.y + 1; (Board[check.x][i] == player2) && (i < Board.length - 1); i++){
+                    if ((Board[check.x][i+1] == Blank)) {
+                        p1Available.add(new Coordinates(check.x,i + 1));
                     }
                 }
             }
             if(check.x <= 5){
-                if(Board[check.x+1][check.y] == player2) {
-                    if ((Board[check.x + 2][check.y] == Blank)) {
-                        p1Available.add(new Coordinates(check.x + 2, check.y));
+                for(int i = check.x + 1; (Board[i][check.y] == player2) && (i < Board.length - 1); i++){
+                    if ((Board[i+1][check.y] == Blank)) {
+                        p1Available.add(new Coordinates(i+1, check.y));
+                        break;
                     }
                 }
             }
 
             if(check.x >=2 && check.y >=2){
-                if(Board[check.x-1][check.y-1] == player2) {
-                    if (Board[check.x - 2][check.y - 2] == Blank) {
-                        p1Available.add(new Coordinates(check.x - 2, check.y - 2));
+                for(int i = check.x-1, j = check.y-1; (Board[i][j] == player2) && (i > 0 && j > 0); i--,j--){
+                    if (Board[i-1][j-1] == Blank) {
+                        p1Available.add(new Coordinates(i-1,j-1));
                     }
                 }
             }
 
             if(check.x <=5 && check.y >=2){
-                if(Board[check.x+1][check.y-1] == player2) {
-                    if (Board[check.x + 2][check.y - 2] == Blank) {
-                        p1Available.add(new Coordinates(check.x + 2, check.y - 2));
+                for(int i = check.x+1, j = check.y-1; (Board[i][j] == player2) && (i < (Board.length - 1) && j > 0); i++,j--){
+                    if (Board[i+1][j-1] == Blank) {
+                        p1Available.add(new Coordinates(i+1,j-1));
                     }
                 }
             }
 
             if(check.x >=2 && check.y<=5){
-                if(Board[check.x-1][check.y+1] == player2) {
-                    if(Board[check.x - 2][check.y + 2] == Blank) {
-                        p1Available.add(new Coordinates(check.x - 2, check.y + 2));
+                for(int i = check.x-1, j = check.y+1; (Board[i][j] == player2) && (i > 0 && j < (Board.length - 1)); i--,j++){
+                    if(Board[i-1][j+1] == Blank) {
+                        p1Available.add(new Coordinates(i-1,j+1));
                     }
                 }
             }
 
             if(check.x <=5 && check.y <=5){
-                if(Board[check.x+1][check.y+1] == player2) {
-                    if(Board[check.x + 2][check.y + 2] == Blank) {
-                        p1Available.add(new Coordinates(check.x + 2, check.y + 2));
+                for(int i = check.x+1, j = check.y+1; (Board[i][j] == player2) && (i <(Board.length - 1) && j < (Board.length - 1)); i++,j++){
+                    if(Board[i+1][j+1] == Blank) {
+                        p1Available.add(new Coordinates(i+1,j+1));
                     }
                 }
             }
@@ -323,13 +316,13 @@ public class Board {
         }
         return new ArrayList<Coordinates>(p1Available);
     }
-    private boolean isInside(Coordinates coord) {
+    /*private boolean isInside(Coordinates coord) {
 
         if(coord.x > 7 || coord.y > 7 || coord.x < 0 || coord.y < 0) {
             return false;
         }
         return true;
-    }
+    }*/
 
 
     public boolean isThereMoves(){
