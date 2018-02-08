@@ -13,7 +13,6 @@ public class Board {
     public int[][] Board;
 
     //Initializing Board(Constructor)
-
     public Board(){
         Board = new int[8][8];
     }
@@ -27,13 +26,11 @@ public class Board {
     	}
     }
 
-    //Probably all this flips could be split up in a check + flip function. Reusing the check function in the possible moves method
     private void flipRight(Coordinates coords, int color, int oppositeColor){
-
-			//Iterate to find a piece of our color
+			//Iterate through the pieces of the opposite color, if they exist
 			for(int i = coords.x + 1; (i < Board.length-1) && Board[i][coords.y] == oppositeColor; i++){
+				//If next piece is ours, then we can flip all the other ones
 				if(Board[i+1][coords.y] == color){
-					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
 					for(i = coords.x + 1; i <= max; i++){
 						Board[i][coords.y] = color;
@@ -44,12 +41,8 @@ public class Board {
 		
     }
     private void flipLeft(Coordinates coords, int color, int oppositeColor){
-
-    	//Check to the left of the piece
-			//Iterate to find a piece of our color
 			for(int i = coords.x - 1; i > 0 && Board[i][coords.y] == oppositeColor; i--){
 				if(Board[i-1][coords.y] == color){
-					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
 					for(i = coords.x - 1; i >= min; i--){
 						Board[i][coords.y] = color;
@@ -60,12 +53,8 @@ public class Board {
 		
     }
     private void flipUp(Coordinates coords, int color, int oppositeColor){
-
-    	//Check upper
-			//Iterate to find a piece of our color
 			for(int i = coords.y + 1; i < (Board.length-1) && Board[coords.x][i] == oppositeColor; i++){
 				if(Board[coords.x][i+1] == color){
-					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
 					for(i = coords.y + 1; i <= max; i++){
 						Board[coords.x][i] = color;
@@ -76,11 +65,8 @@ public class Board {
 		
     }
     private void flipDown(Coordinates coords, int color, int oppositeColor){
-
-			//Iterate to find a piece of our color
 			for(int i = coords.y - 1; i > 0 && Board[coords.x][i] == oppositeColor; i--){
 				if(Board[coords.x][i-1] == color){
-					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
 					for(i = coords.y - 1; i >= min; i--){
 						Board[coords.x][i] = color;
@@ -91,11 +77,8 @@ public class Board {
 		
     }
     private void flipUpRight(Coordinates coords, int color, int oppositeColor){
-    	//Check upper right corner
-			//Iterate to find a piece of our color
 			for(int i = coords.x + 1,j = coords.y + 1; (i < (Board.length - 1)) && (j < (Board.length-1)) && Board[i][j] == oppositeColor; i++,j++){
 				if(Board[i+1][j+1] == color){
-					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int max = i;
 					for(i = coords.x + 1,j = coords.y + 1; i <= max; i++,j++){
 						Board[i][j] = color;
@@ -106,11 +89,8 @@ public class Board {
 		
     }
     private void flipUpLeft(Coordinates coords, int color, int oppositeColor){
-
-			//Iterate to find a piece of our color
 			for(int i = coords.x - 1,j = coords.y + 1; (i > 0) && (j < Board.length - 1) && Board[i][j] == oppositeColor; i--,j++){
 				if(Board[i-1][j+1] == color){
-					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
 					for(i = coords.x - 1,j = coords.y + 1; i >= min; i--,j++){
 						Board[i][j] = color;
@@ -121,8 +101,6 @@ public class Board {
 		
     }
     private void flipDownRight(Coordinates coords, int color, int oppositeColor){
-
-			//Iterate to find a piece of our color
 			for(int i = coords.x + 1,j = coords.y - 1; (i < Board.length - 1) && (j > 0) && Board[i][j] == oppositeColor; i++,j--){
 				if(Board[i+1][j-1] == color){
 					//If found, make all pieces in the middle of our color and stop looking for more pieces
@@ -136,11 +114,8 @@ public class Board {
 		}
     
     private void flipDownLeft(Coordinates coords, int color, int oppositeColor){
-
-			//Iterate to find a piece of our color
 			for(int i = coords.x - 1,j = coords.y - 1; (i > 0) && (j > 0) && Board[i][j] == oppositeColor; i--,j--){
 				if(Board[i-1][j-1] == color){
-					//If found, make all pieces in the middle of our color and stop looking for more pieces
 					int min = i;
 					for(i = coords.x - 1,j = coords.y - 1; i >= min; i--,j--){
 						Board[i][j] = color;
@@ -189,29 +164,6 @@ public class Board {
     	}
     }
 
-    /*private ArrayList<Coordinates> p2Pieces(int player){
-
-        int player2;
-        if (player == Black){
-            player2 = White;
-        } else{
-            player2 = Black;
-        }
-
-        ArrayList<Coordinates> p2pieces = new ArrayList<Coordinates>();
-
-        for(int i=0; i< Board.length;i++){
-            for(int j=0; j < Board.length;j++) {
-                if(Board[i][j] == player2){
-                    p2pieces.add(new Coordinates(i,j));
-                }
-            }
-
-        }
-        return p2pieces;
-
-    }*/
-
     private ArrayList<Coordinates> pieces(int player){
         ArrayList<Coordinates> p1pieces = new ArrayList<Coordinates>();
 
@@ -241,13 +193,13 @@ public class Board {
         Iterator<Coordinates> it = p1.iterator();
 
         //It checks every one of its pieces and the blank spaces surrounding them, if it is Blank it adds it to
-        //the array with all the possible moves
+        //the array with all the possible moves. Being a set, we avoid repeated moves.
 
         while(it.hasNext()){
             check = it.next();
         //Check if there is a possible move under the piece
-        //If there is a piece of the other player under yours it checks if the next space is blank
-        //The first if is checking there is at least 2 spaces in under the piece cos that is the minimum requiered to make a move, the other player piece
+        //If there is a piece of the other player under yours it checks if some of the next spaces are blank
+        //The first if is checking there is at least 2 spaces in under the piece cos that is the minimum required to make a move, the other player piece
         //and the space to put yours to eat that piece
             if(check.y >= 2){
                 for(int i = check.y - 1; (Board[check.x][i] == player2) && (i > 0); i--){
@@ -315,25 +267,6 @@ public class Board {
 
         }
         return new ArrayList<Coordinates>(p1Available);
-    }
-    /*private boolean isInside(Coordinates coord) {
-
-        if(coord.x > 7 || coord.y > 7 || coord.x < 0 || coord.y < 0) {
-            return false;
-        }
-        return true;
-    }*/
-
-
-    public boolean isThereMoves(){
-        for(int i = 0; i < Board.length; i++) {
-            for (int j = 0; j < Board[i].length; j++) {
-                if (Board[i][j] == Blank) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
     
     public boolean isThereMoves(int color) {

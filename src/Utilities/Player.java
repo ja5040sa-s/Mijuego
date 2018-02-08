@@ -28,15 +28,16 @@ public class Player {
 		}
 		else {
 			do{				
-				System.out.println();
-				System.out.print("Your possible moves are: ");
-				for(Coordinates move: playerMoves) {
-					System.out.printf("%c%c ",move.getX(),move.getY());
-				}
-				System.out.println("Write where to place your piece");
+				do{
+					System.out.println();
+					System.out.print("Your possible moves are: ");
+					for(Coordinates move: playerMoves) {
+						System.out.printf("%c%c ",move.getX(),move.getY());
+					}
+					System.out.println("Write where to place your piece");
 
-				
-				aux = reader.next();
+					aux = reader.next();
+				}while(aux.length() < 2);
 				X = aux.charAt(0); 
 				Y = aux.charAt(1);
 				for(Coordinates move: playerMoves) {

@@ -36,9 +36,9 @@ public class Game {
 		System.out.println("Colors have been chosen");
 		
 		do{
-			System.out.println("Choose how many seconds the algorithm will have to \"think\" (min 5)");
+			System.out.println("Choose how many seconds the algorithm will have to \"think\" (min 1)");
 			thinkTime = reader.nextInt();
-		}while(thinkTime < 5);
+		}while(thinkTime < 1);
 		
 		if(color.equals("White")) {
 			human = new Player(Board.White);

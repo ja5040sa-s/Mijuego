@@ -8,7 +8,7 @@ import Utilities.*;
 public class AIPlayer {
 
     private int color = 0;
-    private int maxdepth = 4;
+    private int maxdepth = 5;
     private int oppositeColor = 0;
     private long startTime;
     private long maxTime;
@@ -32,15 +32,23 @@ public class AIPlayer {
 
     private int minMax(Board board, int depth, int ref_value) {
     	int checkValue;
+    	int color_this_call;
+    	boolean min;
     	ArrayList<Integer> values;
+    	Board localBoard = new Board();
     	
     	if((System.nanoTime()/1000000 -  startTime) > maxTime){
     		System.out.println("The algorithm ran out of time");
     		return heruistic(board);
     	}
     	
-    	int color_this_call;
-    	if((depth % 2) == 1){
+    	if((depth%2) == 1)
+    		min = true;
+    	else
+    		min = false;
+    	
+    	
+    	if(min){
     		color_this_call = oppositeColor;
     		values = new ArrayList<Integer>(Arrays.asList(Integer.MAX_VALUE));
     	}	
@@ -49,7 +57,6 @@ public class AIPlayer {
     		values = new ArrayList<Integer>(Arrays.asList(Integer.MIN_VALUE));
     	}
     	ArrayList<Coordinates> moves = board.possibleMoves(color_this_call);
-    	//Check if there are available moves
     	
 
     	//If we have reached the maximum depth, then we are in a min. Check all possible moves and return the minimum 
@@ -60,7 +67,6 @@ public class AIPlayer {
         	values = new ArrayList<Integer>();
 
     		for(Coordinates nextMove : moves) {
-    			Board localBoard = new Board();
             	localBoard.copyBoard(board);
     			localBoard.move(nextMove,color_this_call);
     			
@@ -74,17 +80,13 @@ public class AIPlayer {
     	}
     	
     	//If we are not in a maximum depth, do every move and call corresponding function. Then check all the values and decide
-    	if(moves.isEmpty()){
-    		return minMax(board,depth+1,1);//Fix
-    	}
-    	
+
     	for(Coordinates nextMove : moves){
-    		Board localBoard = new Board();
         	localBoard.copyBoard(board);
     		localBoard.move(nextMove,color_this_call);
     		
     		//Check if we are in min or max to avoid keeping with the for if needed.
-    		if((depth % 2) == 1){
+    		if(min){
         		checkValue = minMax(localBoard,depth + 1,Collections.min(values));
     			if(ref_value >= checkValue)
     				return Integer.MIN_VALUE;
@@ -101,7 +103,7 @@ public class AIPlayer {
     	}
 
 		//We start with depth of 1 (as 0 is the inizialization, max) , which is min
-		if((depth % 2) == 1)
+		if(min)
 			return Collections.min(values);
 		else
 			return Collections.max(values);
@@ -135,6 +137,7 @@ public class AIPlayer {
     	startTime = System.nanoTime()/1000000;
     	
     	int depth = 0;
+    	Board localBoard = new Board();
     	ArrayList<Coordinates> moves = board.possibleMoves(this.color);
     	
     	if(moves.isEmpty()){
@@ -143,12 +146,11 @@ public class AIPlayer {
     	else{
     		ArrayList<Integer> values = new ArrayList<Integer>(Arrays.asList(Integer.MIN_VALUE));
 	    	for(Coordinates nextMove : moves){
-		    	Board localBoard = new Board();
 		       	localBoard.copyBoard(board);
 		    	localBoard.move(nextMove,color);
 		    	values.add(minMax(localBoard,depth + 1,Collections.max(values)));
 		    }
-	    	Coordinates bestMove = moves.get(values.indexOf(Collections.max(values))+1);
+	    	Coordinates bestMove = moves.get(values.indexOf(Collections.max(values))-1);
 	    	System.out.println();
 	    	System.out.println("The AI move is: " + bestMove.getX() + bestMove.getY());
 	    	board.move(bestMove, color);
