@@ -79,8 +79,10 @@ public class AIPlayer {
     		return Collections.min(values);
     	}
     	
-    	//If we are not in a maximum depth, do every move and call corresponding function. Then check all the values and decide
-
+    	if(moves.isEmpty()){
+    		return minMax(board,depth+1,values.get(0));
+    	}
+    	
     	for(Coordinates nextMove : moves){
         	localBoard.copyBoard(board);
     		localBoard.move(nextMove,color_this_call);
